@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<canvas id="myCanvas" width="1920" height="1080" style="border:1px solid grey"></canvas>
+<script >
+
+const string = require("./storage")
+console.log("eee") 
+//import cliProgress from "cli-progress"
+const c = document.getElementById("myCanvas");
+const ctx = c.getContext("2d");
+console.log("eee")
+
+function text2Binary(string) {
+    return string.split('').map(function (char) {
+        return char.charCodeAt(0).toString(2)
+    }).join(' ')
+
+}
+const binary = text2Binary(string).replace(/\s+/g, '')
+
+const info = Array.from(binary);
+let color = [];
+
+
+for (let a = 0; a<217; a++) { //217
+    let startHeight = (5*a)
+    console.log(a+1);
+    for (let i = 0; i<385; i++) { //385
+
+        for (let b = 0; b<3; b++) {
+ 
+        if (info[0] === "1") {
+            color.push(255)
+        } else {
+            color.push(0)
+        }
+        info.shift();
+        
+        
+    }
+    
+    let newColor = color.toString()
+  
+        ctx.fillStyle = `rgb(${newColor})`;
+        let startWidth = (5*i)
+    
+        ctx.beginPath();
+        ctx.rect(startWidth, startHeight, 5, 5);
+        ctx.fill();
+        color = [];
+    }
+}
+console.log("Complete")
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
